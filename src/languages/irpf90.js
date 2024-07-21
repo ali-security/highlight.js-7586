@@ -57,6 +57,9 @@ function(hljs) {
       // IRPF90 special built_ins
       'IRP_ALIGN irp_here'
   };
+  // regex in both fortran and irpf90 should match
+  var OPTIONAL_NUMBER_SUFFIX = /(_[a-z_\d]+)?/;
+  var OPTIONAL_NUMBER_EXP = /([de][+-]?\d+)?/;
   return {
     case_insensitive: true,
     keywords: F_KEYWORDS,
@@ -74,7 +77,17 @@ function(hljs) {
       hljs.COMMENT('begin_doc', 'end_doc', {relevance: 10}),
       {
         className: 'number',
-        begin: '(?=\\b|\\+|\\-|\\.)(?=\\.\\d|\\d)(?:\\d+)?(?:\\.?\\d*)(?:[de][+-]?\\d+)?\\b\\.?',
+        variants: [
+          {
+            begin: hljs.concat(/\b\d+/, /\.(\d*)/, OPTIONAL_NUMBER_EXP, OPTIONAL_NUMBER_SUFFIX)
+          },
+          {
+            begin: hljs.concat(/\b\d+/, OPTIONAL_NUMBER_EXP, OPTIONAL_NUMBER_SUFFIX)
+          },
+          {
+            begin: hljs.concat(/\.\d+/, OPTIONAL_NUMBER_EXP, OPTIONAL_NUMBER_SUFFIX)
+          }
+        ],
         relevance: 0
       }
     ]

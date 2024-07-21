@@ -89,7 +89,7 @@ function(hljs) {
   SUBST.contains = EXPRESSIONS;
 
   var TITLE = hljs.inherit(hljs.TITLE_MODE, {begin: JS_IDENT_RE});
-  var PARAMS_RE = '(\\(.*\\))?\\s*\\B[-=]>';
+  var POSSIBLE_PARAMS_RE = '(\\(.*\\)\\s*)?\\B[-=]>';
   var PARAMS = {
     className: 'params',
     begin: '\\([^\\(]', returnBegin: true,
@@ -111,7 +111,7 @@ function(hljs) {
       hljs.HASH_COMMENT_MODE,
       {
         className: 'function',
-        begin: '^\\s*' + JS_IDENT_RE + '\\s*=\\s*' + PARAMS_RE, end: '[-=]>',
+        begin: '^\\s*' + JS_IDENT_RE + '\\s*=\\s*' + POSSIBLE_PARAMS_RE, end: '[-=]>',
         returnBegin: true,
         contains: [TITLE, PARAMS]
       },
@@ -122,7 +122,7 @@ function(hljs) {
         contains: [
           {
             className: 'function',
-            begin: PARAMS_RE, end: '[-=]>',
+            begin: POSSIBLE_PARAMS_RE, end: '[-=]>',
             returnBegin: true,
             contains: [PARAMS]
           }

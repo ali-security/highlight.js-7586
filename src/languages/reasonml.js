@@ -21,8 +21,8 @@ function(hljs) {
   var RE_MODULE_IDENT = '`?[A-Z$_][0-9a-zA-Z$_]*';
 
   var RE_PARAM_TYPEPARAM = '\'?[a-z$_][0-9a-z$_]*';
-  var RE_PARAM_TYPE = '\s*:\s*[a-z$_][0-9a-z$_]*(\(\s*(' + RE_PARAM_TYPEPARAM + '\s*(,' + RE_PARAM_TYPEPARAM + ')*)?\s*\))?';
-  var RE_PARAM = RE_IDENT + '(' + RE_PARAM_TYPE + ')?(' + RE_PARAM_TYPE + ')?';
+  var RE_PARAM_TYPE = '\\s*:\\s*[a-z$_][0-9a-z$_]*(\\(\\s*(' + RE_PARAM_TYPEPARAM + '\\s*(,' + RE_PARAM_TYPEPARAM + '\\s*)*)?\\))?';
+  var RE_PARAM = RE_IDENT + '(' + RE_PARAM_TYPE + '){0,2}';
   var RE_OPERATOR = "(" + orReValues(['||', '&&', '++', '**', '+.', '*', '/', '*.', '/.', '...', '|>']) + "|==|===)";
   var RE_OPERATOR_SPACED = "\\s+" + RE_OPERATOR + "\\s+";
 

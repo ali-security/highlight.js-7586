@@ -130,7 +130,7 @@ function(hljs) {
 
   // mocha: direct_method
     var DIRECT = {
-      begin: /<([\w\._:\-]+)((\s*.*)=('|").*('|"))?>/,
+      begin: /<([\w\._:\-]+)(\s+\S*=('|").*('|"))?>/,
       end: /(\/[\w\._:\-]+>)/,
       subLanguage: 'xml',
       contains: [{

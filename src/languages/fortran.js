@@ -51,6 +51,11 @@ function(hljs) {
       'bge bgt ble blt dshiftl dshiftr findloc iall iany iparity image_index lcobound ucobound maskl maskr ' +
       'num_images parity popcnt poppar shifta shiftl shiftr this_image'
   };
+
+  // regex in both fortran and irpf90 should match
+  var OPTIONAL_NUMBER_SUFFIX = /(_[a-z_\d]+)?/;
+  var OPTIONAL_NUMBER_EXP = /([de][+-]?\d+)?/;
+
   return {
     case_insensitive: true,
     aliases: ['f90', 'f95'],
@@ -68,7 +73,17 @@ function(hljs) {
       hljs.COMMENT('!', '$', {relevance: 0}),
       {
         className: 'number',
-        begin: '(?=\\b|\\+|\\-|\\.)(?=\\.\\d|\\d)(?:\\d+)?(?:\\.?\\d*)(?:[de][+-]?\\d+)?\\b\\.?',
+        variants: [
+          {
+            begin: hljs.concat(/\b\d+/, /\.(\d*)/, OPTIONAL_NUMBER_EXP, OPTIONAL_NUMBER_SUFFIX)
+          },
+          {
+            begin: hljs.concat(/\b\d+/, OPTIONAL_NUMBER_EXP, OPTIONAL_NUMBER_SUFFIX)
+          },
+          {
+            begin: hljs.concat(/\.\d+/, OPTIONAL_NUMBER_EXP, OPTIONAL_NUMBER_SUFFIX)
+          }
+        ],
         relevance: 0
       }
     ]

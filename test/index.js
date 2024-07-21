@@ -22,3 +22,5 @@ require('./markup');
 require('./special');
 
 require("./tools");
+
+require("./regex");

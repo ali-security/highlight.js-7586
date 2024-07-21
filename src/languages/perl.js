@@ -4,7 +4,10 @@ Author: Peter Leonov <gojpeg@yandex.ru>
 Category: common
 */
 
+
 function(hljs) {
+  // https://perldoc.perl.org/perlre#Modifiers
+  var REGEX_MODIFIERS = /[dualxmsipn]{0,12}/; // aa and xx are valid, making max length 12
   var PERL_KEYWORDS = 'getpwent getservent quotemeta msgrcv scalar kill dbmclose undef lc ' +
     'ma syswrite tr send umask sysopen shmwrite vec qx utime local oct semctl localtime ' +
     'readpipe do return format read sprintf dbmopen pop getpgrp not getpwnam rewinddir qq' +
@@ -116,22 +119,36 @@ function(hljs) {
         hljs.HASH_COMMENT_MODE,
         {
           className: 'regexp',
-          begin: '(s|tr|y)/(\\\\.|[^/])*/(\\\\.|[^/])*/[a-z]*',
+          begin: hljs.concat(
+            /(s|tr|y)/,
+            /\//,
+            /(\\.|[^\\\/])*/,
+            /\//,
+            /(\\.|[^\\\/])*/,
+            /\//,
+            REGEX_MODIFIERS
+          ),
           relevance: 10
         },
         {
           className: 'regexp',
-          begin: '(m|qr)?/', end: '/[a-z]*',
-          contains: [hljs.BACKSLASH_ESCAPE],
+          begin: /(m|qr)?\//,
+          end: hljs.concat(
+            /\//,
+            REGEX_MODIFIERS
+          ),
+          contains: [ hljs.BACKSLASH_ESCAPE ],
           relevance: 0 // allows empty "//" which is a common comment delimiter in other languages
         }
       ]
     },
     {
       className: 'function',
-      beginKeywords: 'sub', end: '(\\s*\\(.*?\\))?[;{]', excludeEnd: true,
+      beginKeywords: 'sub',
+      end: '(\\s*\\(.*?\\))?[;{]',
+      excludeEnd: true,
       relevance: 5,
-      contains: [hljs.TITLE_MODE]
+      contains: [ hljs.TITLE_MODE ]
     },
     {
       begin: '-\\w\\b',
@@ -143,9 +160,9 @@ function(hljs) {
       subLanguage: 'mojolicious',
       contains: [
         {
-            begin: "^@@.*",
-            end: "$",
-            className: "comment"
+          begin: "^@@.*",
+          end: "$",
+          className: "comment"
         }
       ]
     }

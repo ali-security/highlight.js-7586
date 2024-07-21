@@ -47,11 +47,11 @@ function(hljs) {
         ]
       },
       {
-        begin: '[a-zA-Z_][a-zA-Z_0-9]*(\'+[\\.\']*|[\\.\']+)', end: '',
+        begin: '[a-zA-Z_][a-zA-Z_0-9]*[\\.\']+', end: '',
         relevance: 0
       },
       {
-        begin: '\\[', end: '\\]\'*[\\.\']*',
+        begin: '\\[', end: '\\][\\.\']*',
         relevance: 0,
         contains: COMMON_CONTAINS
       },

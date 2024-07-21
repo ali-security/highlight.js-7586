@@ -58,8 +58,13 @@ function(hljs) {
       {
         className: 'literal',
         variants: [
-          {begin: '#\\s+[a-zA-Z\\ \\.]*', relevance: 0}, // looks like #-comment
-          {begin: '#[a-zA-Z\\ \\.]+'}
+          { // looks like #-comment
+            begin: '#\\s+',
+            relevance: 0
+          },
+          {
+            begin: '#[a-zA-Z .]+'
+          }
         ]
       }
     ]

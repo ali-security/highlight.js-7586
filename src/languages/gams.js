@@ -67,6 +67,7 @@ function (hljs) {
       hljs.C_NUMBER_MODE,
     ],
   };
+  var COMMENT_WORD = /[a-z0-9&#*=?@\\><:,()$[\]_.{}!+%^-]+/;
   var DESCTEXT = { // Parameter/set/variable description text
     begin: /[a-z][a-z0-9_]*(\([a-z0-9_, ]*\))?[ \t]+/,
     excludeBegin: true,
@@ -77,7 +78,12 @@ function (hljs) {
       ASSIGNMENT,
       {
         className: 'comment',
-        begin: /([ ]*[a-z0-9&#*=?@>\\<:\-,()$\[\]_.{}!+%^]+)+/,
+        // one comment word, then possibly more
+        begin: hljs.concat(
+          COMMENT_WORD,
+          // [ ] because \s would be too broad (matching newlines)
+          hljs.anyNumberOfTimes(hljs.concat(/[ ]+/, COMMENT_WORD))
+        ),
         relevance: 0
       },
     ],

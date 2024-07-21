@@ -25,7 +25,7 @@ function (hljs) {
   };
   var PATH = {
     className: 'string',
-    begin: /\B(([\/.])[\w\-.\/=]+)+/,
+    begin: /\B([\/.])[\w\-.\/=]+/
   };
   var COMMAND_PARAMS = {
     className: 'params',

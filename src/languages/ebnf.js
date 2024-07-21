@@ -8,7 +8,7 @@ function(hljs) {
 
     var nonTerminalMode = {
         className: "attribute",
-        begin: /^[ ]*[a-zA-Z][a-zA-Z-]*([\s-]+[a-zA-Z][a-zA-Z]*)*/
+        begin: /^[ ]*[a-zA-Z]+([\s_-]+[a-zA-Z]+)*/
     };
 
     var specialSequenceMode = {

@@ -167,7 +167,7 @@ function(hljs) {
       },
       // images and links
       {
-        begin: '(link:)?(http|https|ftp|file|irc|image:?):\\S+\\[.*?\\]',
+        begin: '(link:)?(http|https|ftp|file|irc|image:?):\\S+?\\[[^[]*?\\]',
         returnBegin: true,
         contains: [
           {

@@ -27,7 +27,11 @@ function(hljs) {
       hljs.APOS_STRING_MODE,
       hljs.QUOTE_STRING_MODE,
       {
-        begin: '\\?(::)?([A-Z]\\w*(::)?)+'
+        begin: hljs.concat(
+          /\?(::)?/,
+          /([A-Z]\w*)/, // at least one identifier
+          /((::)[A-Z]\w*)*/ // perhaps more
+        )
       },
       {
         begin: '->'

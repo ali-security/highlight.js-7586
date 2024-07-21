@@ -59,7 +59,7 @@ function(hljs) {
 
     decimal_exponent_re = '([eE][+-]?' + decimal_integer_nosus_re + ')',
     decimal_float_re = '(' + decimal_integer_nosus_re + '(\\.\\d*|' + decimal_exponent_re + ')|' +
-                '\\d+\\.' + decimal_integer_nosus_re + decimal_integer_nosus_re + '|' +
+                '\\d+\\.' + decimal_integer_nosus_re + '|' +
                 '\\.' + decimal_integer_re + decimal_exponent_re + '?' +
               ')',
     hexadecimal_float_re = '(0[xX](' +
